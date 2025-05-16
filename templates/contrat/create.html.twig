@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
+                <h1 class="mb-4">{{ app.request.attributes.get("_route") == "app_contrat_edit" ? 'Modifier' : 'Ajouter' }} le contrat</h1>
+
+                {{ form_start(form) }}
+
+                <div class="mb-3">
+                    {{ form_label(form.client) }}
+                    {{ form_widget(form.client, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.client) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.application) }}
+                    {{ form_widget(form.application, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.application) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.file) }}
+                    {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.file) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.createdAt) }}
+                    {{ form_widget(form.createdAt, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.createdAt) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.status) }}
+                    {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.status) }}
+                </div>
+
+                <div class="d-grid mt-4">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

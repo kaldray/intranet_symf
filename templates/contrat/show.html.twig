@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Détail du contrat</h1>
+
+        <ul class="list-group">
+            <li class="list-group-item">ID: {{ contrat.id }}</li>
+            <li class="list-group-item">Client: {{ contrat.client.raisonSocial }}</li>
+            <li class="list-group-item">Application: {{ contrat.application.nom }}</li>
+            <li class="list-group-item">Fichier: <a href="/uploads/{{ contrat.file }}">Télécharger</a></li>
+            <li class="list-group-item">Date de création: {{ contrat.createdAt|date('d/m/Y') }}</li>
+            <li class="list-group-item">Statut: {{ contrat.status }}</li>
+        </ul>
+
+        <div class="mt-4">
+            <a href="{{ path('app_contrat_edit', {'contrat': contrat.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('app_contrat') }}" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+{% endblock %}

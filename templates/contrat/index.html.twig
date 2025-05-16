@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <h1>Liste des contrats</h1>
+            </div>
+            <div class="col-6 text-end align-self-center">
+                <a class="link" href="{{ path('app_contrat_create') }}">Ajouter</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% if contrats is defined %}
+                    <table class="table p-5 border mt-5">
+                        <thead>
+                        <tr>
+                            <th class="p-2">ID</th>
+                            <th class="p-2">Client</th>
+                            <th class="p-2">Application</th>
+                            <th class="p-2">Fichier</th>
+                            <th class="p-2">Date de création</th>
+                            <th class="p-2">Statut</th>
+                            <th class="p-2">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for contrat in contrats %}
+                            <tr class="border">
+                                <td class="p-2">{{ contrat.id }}</td>
+                                <td class="p-2">{{ contrat.client.raisonSocial }}</td>
+                                <td class="p-2">{{ contrat.application.nom }}</td>
+                                <td class="p-2"><a href="/uploads/{{ contrat.file }}">Télécharger</a></td>
+                                <td class="p-2">{{ contrat.createdAt|date('d/m/Y') }}</td>
+                                <td class="p-2">{{ contrat.status }}</td>
+                                <td class="p-2">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ path('app_contrat_show', {'contrat': contrat.id}) }}">Voir</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('app_contrat_edit', {'contrat': contrat.id}) }}">Modifier</a></li>
+                                            <li>
+                                                <form action="{{ path('app_contrat_delete', {'contrat': contrat.id}) }}" method="post" onsubmit="return confirm('Confirmer la suppression ?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contrat.id) }}">
+                                                    <button class="dropdown-item text-danger" type="submit">Supprimer</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
