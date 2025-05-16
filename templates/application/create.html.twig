@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2 class="mb-4">{{ app.request.attributes.get("_route") == "app_application_edit" ? 'Modifier' : 'Ajouter' }}
+                    une application</h2>
+                {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_label(form.nom) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.nom) }}
+                </div>
+
+                <div class="form-check mb-3">
+                    {{ form_widget(form.actif, {'attr': {'class': 'form-check-input'}}) }}
+                    {{ form_label(form.actif, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                    {{ form_errors(form.actif) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.createdAt) }}
+                    {{ form_widget(form.createdAt, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.createdAt) }}
+                </div>
+
+                <div class="d-grid">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

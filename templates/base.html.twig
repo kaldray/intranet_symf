@@ -16,6 +16,13 @@
 </head>
 <body>
 {% include('components/nav.html.twig') %}
+<div class="container w-75 mx-auto">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success my-3" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
 {% block body %}{% endblock %}
 </body>
 </html>

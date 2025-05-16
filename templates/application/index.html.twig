@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <h1>Liste des applications</h1>
+            </div>
+            <div class="col-6 text-end align-self-center">
+                <a class="link" href="{{ path('app_application_create') }}">Ajouter</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% if applications is defined %}
+                    <table class="table p-5 border mt-5">
+                        <thead>
+                        <tr>
+                            <th class="p-2">ID</th>
+                            <th class="p-2">Nom</th>
+                            <th class="p-2">Actif</th>
+                            <th class="p-2">Modifier</th>
+                            <th class="p-2">Supprimer</th>
+                            <th class="p-2">Date de création</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for a in applications %}
+                            <tr class="border">
+                                <td class="p-2">{{ a.id }} </td>
+                                <td class="p-2">{{ a.nom }} </td>
+                                <td class="p-2">{{ a.actif ? "Oui" : "Non" }} </td>
+                                <td class="p-2"><a class="btn btn-link"
+                                                   href="{{ path('app_application_edit',{application: a.id}) }}">Modifier</a>
+                                </td>
+                                <td class="p-2"><a class="btn btn-link"
+                                                   href="{{ path('app_application_delete',{application: a.id}) }}">Supprimer</a>
+                                </td>
+                                <td class="p-2">{{ a.createdAt|date('Y-m-d H:i:s') }} </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
