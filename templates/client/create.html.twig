@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-12">
+                <h1 class="mb-4">{{ app.request.attributes.get("_route") == "app_client_edit" ? 'Modifier' : 'Ajouter' }}
+                    le client</h1>
+
+                {{ form_start(form) }}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form_label(form.raison_social) }}
+                            {{ form_widget(form.raison_social, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.raison_social) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.adresse_one) }}
+                            {{ form_widget(form.adresse_one, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.adresse_one) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.code_postal) }}
+                            {{ form_widget(form.code_postal, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.code_postal) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.ville) }}
+                            {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.ville) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.pays) }}
+                            {{ form_widget(form.pays, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.pays) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.forme_juridique) }}
+                            {{ form_widget(form.forme_juridique, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.forme_juridique) }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            {{ form_label(form.activite) }}
+                            {{ form_widget(form.activite, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.activite) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.siret) }}
+                            {{ form_widget(form.siret, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.siret) }}
+                        </div>
+
+                        <div class="form-check mb-3">
+                            {{ form_widget(form.actif, {'attr': {'class': 'form-check-input'}}) }}
+                            {{ form_label(form.actif, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                            {{ form_errors(form.actif) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.nom_prenom) }}
+                            {{ form_widget(form.nom_prenom, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.nom_prenom) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.email_rl) }}
+                            {{ form_widget(form.email_rl, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.email_rl) }}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_label(form.telephone_rl) }}
+                            {{ form_widget(form.telephone_rl, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.telephone_rl) }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-grid mt-4">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+
+                {{ form_end(form) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

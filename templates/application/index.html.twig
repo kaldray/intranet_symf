@@ -34,8 +34,16 @@
                                 <td class="p-2"><a class="btn btn-link"
                                                    href="{{ path('app_application_edit',{application: a.id}) }}">Modifier</a>
                                 </td>
-                                <td class="p-2"><a class="btn btn-link"
-                                                   href="{{ path('app_application_delete',{application: a.id}) }}">Supprimer</a>
+                                <td class="p-2">
+                                    <form action="{{ path('app_application_delete', {'application': a.id}) }}"
+                                          method="post"
+                                          onsubmit="return confirm('Confirmer la suppression ?');">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('delete' ~ a.id) }}">
+                                        <button class="btn btn-link text-danger" type="submit">Supprimer
+                                        </button>
+                                    </form>
                                 </td>
                                 <td class="p-2">{{ a.createdAt|date('Y-m-d H:i:s') }} </td>
                             </tr>

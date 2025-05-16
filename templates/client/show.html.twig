@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-12">
+                <h1 class="mb-4">Fiche client</h1>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Raison sociale :</strong> {{ client.raisonSocial }}</p>
+                        <p><strong>Adresse :</strong> {{ client.adresseOne }}</p>
+                        <p><strong>Code postal :</strong> {{ client.codePostal }}</p>
+                        <p><strong>Ville :</strong> {{ client.ville }}</p>
+                        <p><strong>Pays :</strong> {{ client.pays }}</p>
+                        <p><strong>Forme juridique :</strong> {{ client.formeJuridique }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Activité :</strong> {{ client.activite }}</p>
+                        <p><strong>SIRET :</strong> {{ client.siret }}</p>
+                        <p><strong>Actif :</strong>
+                            {% if client.actif %}
+                                <span class="badge bg-success">Oui</span>
+                            {% else %}
+                                <span class="badge bg-danger">Non</span>
+                            {% endif %}
+                        </p>
+                        <p><strong>Nom et prénom :</strong> {{ client.nomPrenom }}</p>
+                        <p><strong>Email RL :</strong> {{ client.emailRl }}</p>
+                        <p><strong>Téléphone RL :</strong> {{ client.telephoneRl }}</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 d-flex gap-2">
+                    <a href="{{ path('app_client_edit', {client: client.id}) }}" class="btn btn-primary">Modifier</a>
+
+                    <form method="post" action="{{ path('app_client_delete', {client: client.id}) }}"
+                          onsubmit="return confirm('Voulez-vous vraiment supprimer ce client ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ client.id) }}">
+                        <button class="btn btn-danger">Supprimer</button>
+                    </form>
+
+                    <a href="{{ path('app_client') }}" class="btn btn-secondary">Retour à la liste</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
