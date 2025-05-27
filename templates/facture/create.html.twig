@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-12">
+                <h1 class="mb-4">{{ app.request.attributes.get("_route") == "app_facture_edit" ? 'Modifier' : 'Ajouter' }} la facture</h1>
+
+                {{ form_start(form) }}
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.client) }}
+                        {{ form_widget(form.client, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.client) }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.application) }}
+                        {{ form_widget(form.application, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.application) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.date) }}
+                        {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.date) }}
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        {{ form_label(form.date_echeance) }}
+                        {{ form_widget(form.date_echeance, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.date_echeance) }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.file) }}
+                    {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.file) }}
+                    <div class="form-text">Formats acceptés : PDF, DOC, DOCX</div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Montants</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                {{ form_label(form.montant_ht) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.montant_ht, {'attr': {'class': 'form-control', 'placeholder': '0.00'}}) }}
+                                    <span class="input-group-text">€</span>
+                                </div>
+                                {{ form_errors(form.montant_ht) }}
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                {{ form_label(form.montant_tva) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.montant_tva, {'attr': {'class': 'form-control', 'placeholder': '0.00'}}) }}
+                                    <span class="input-group-text">€</span>
+                                </div>
+                                {{ form_errors(form.montant_tva) }}
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                {{ form_label(form.montant_ttc) }}
+                                <div class="input-group">
+                                    {{ form_widget(form.montant_ttc, {'attr': {'class': 'form-control font-weight-bold', 'placeholder': '0.00'}}) }}
+                                    <span class="input-group-text">€</span>
+                                </div>
+                                {{ form_errors(form.montant_ttc) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(form.status) }}
+                    {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.status) }}
+                </div>
+
+                <div class="d-grid mt-4">
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary btn-lg'}}) }}
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

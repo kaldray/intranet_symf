@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FactureController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-6">
+                <h1>Liste des factures</h1>
+            </div>
+            <div class="col-6 text-end align-self-center">
+                <a class="link" href="{{ path('app_facture_create') }}">Ajouter</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% if factures is defined %}
+                    <table class="table p-5 border mt-5">
+                        <thead>
+                        <tr>
+                            <th class="p-2">ID</th>
+                            <th class="p-2">Date</th>
+                            <th class="p-2">Date d'échéance</th>
+                            <th class="p-2">Status</th>
+                            <th class="p-2">Montant HT</th>
+                            <th class="p-2">Montant TVA</th>
+                            <th class="p-2">Montant TTC</th>
+                            <th class="p-2">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for f in factures %}
+                            <tr class="border">
+                                <td class="p-2">{{ f.id }} </td>
+                                <td class="p-2">{{ f.date|date("d/m/Y") }} </td>
+                                <td class="p-2">{{ f.dateEcheance|date("d/m/Y") }} </td>
+                                <td class="p-2">{{ f.status }} </td>
+                                <td class="p-2">{{ f.montantHt|format_number({rounding_mode: 'floor',fraction_digit: 2}) }} </td>
+                                <td class="p-2">{{ f.montantTva|format_number({rounding_mode: 'floor',fraction_digit: 2}) }} </td>
+                                <td class="p-2">{{ f.montantTtc|format_number({rounding_mode: 'floor',fraction_digit: 2}) }} </td>
+                                <td class="p-2">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Actions</button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ path('app_facture_show', {'facture': f.id}) }}">Voir</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('app_facture_edit', {'facture': f.id}) }}">Modifier</a></li>
+                                            <li>
+                                                <form action="{{ path('app_facture_delete', {'facture': f.id}) }}" method="post" onsubmit="return confirm('Confirmer la suppression ?');">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ f.id) }}">
+                                                    <button class="dropdown-item text-danger" type="submit">Supprimer</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

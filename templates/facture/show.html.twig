@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1>Détail de la facture</h1>
+
+        <ul class="list-group">
+            <li class="list-group-item">ID: {{ facture.id }}</li>
+            <li class="list-group-item">Client: {{ facture.client.raisonSocial }}</li>
+            <li class="list-group-item">Application: {{ facture.application.nom }}</li>
+            <li class="list-group-item">Fichier:
+                {% if facture.file %}
+                    <a href="/uploads/{{ facture.file }}">Télécharger</a>
+                {% else %}
+                    Aucun fichier
+                {% endif %}
+            </li>
+            <li class="list-group-item">Date d'émission: {{ facture.date|date('d/m/Y') }}</li>
+            <li class="list-group-item">Date d'échéance: {{ facture.dateEcheance|date('d/m/Y') }}</li>
+            <li class="list-group-item">Montant HT: {{ facture.montantHt }} €</li>
+            <li class="list-group-item">Montant TVA: {{ facture.montantTva }} €</li>
+            <li class="list-group-item">Montant TTC: {{ facture.montantTtc }} €</li>
+            <li class="list-group-item">Statut: {{ facture.status }}</li>
+        </ul>
+
+        <div class="mt-4">
+            <a href="{{ path('app_facture_edit', {'facture': facture.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('app_facture') }}" class="btn btn-secondary">Retour</a>
+        </div>
+    </div>
+{% endblock %}
